@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.SearchView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,6 +14,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.softwareacademy.searchandnavigate.R;
+import com.softwareacademy.searchandnavigate.utils.ViewsUtils;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -24,7 +26,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         activity.startActivity(intent);
     }
     private GoogleMap mMap;
-
+    private SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        searchView = ViewsUtils.findView(this,R.id.searchView);
+
     }
 
 
