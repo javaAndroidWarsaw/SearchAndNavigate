@@ -11,6 +11,10 @@ public class LoginPresenter implements LoginMVP.Presenter {
     private LoginMVP.View view;
     private LoginMVP.Model model;
 
+    /**
+     * Login Presenter, odpowiedzialny za komunikacje pomiędzy modelem a widokiem
+     *
+     */
     public LoginPresenter(LoginMVP.View view, LoginMVP.Model model) {
         this.view = view;
         this.model = model;

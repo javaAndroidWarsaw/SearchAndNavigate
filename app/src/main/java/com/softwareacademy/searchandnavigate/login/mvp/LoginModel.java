@@ -17,6 +17,10 @@ public class LoginModel implements LoginMVP.Model {
     public static final String USER_KEY = "userKey";
     private SharedPreferencesFacade sharedPreferencesFacade;
 
+    /**
+     * W ten sposób nie trzeba deklarować w żadnym module , tylko przez adnotacje konstruktora można używać
+     *
+     */
 
     @Inject
     public LoginModel(SharedPreferencesFacade sharedPreferencesFacade) {

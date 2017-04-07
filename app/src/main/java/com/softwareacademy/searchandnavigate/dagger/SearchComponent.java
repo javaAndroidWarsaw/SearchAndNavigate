@@ -13,6 +13,9 @@ import dagger.Component;
 @Singleton
 @Component(modules = {MainAppModule.class,InterfaceModule.class})
 public interface SearchComponent {
-
+    /**
+     * Pozwala widzieć w całej aplikacji ten obiekt
+     *
+     */
     SharedPreferencesFacade provideSharedPreferencesFacade();
 }
