@@ -10,6 +10,7 @@ import com.softwareacademy.searchandnavigate.utils.shared_preferences.SharedPref
 public class LoginModel implements LoginMVP.Model {
 
 
+    public static final String USER_KEY = "userKey";
     private SharedPreferencesFacade sharedPreferencesFacade;
 
     public LoginModel(SharedPreferencesFacade sharedPreferencesFacade) {
@@ -18,6 +19,17 @@ public class LoginModel implements LoginMVP.Model {
 
     @Override
     public boolean saveUserData(UserProfileDto userProfileDto) {
-        return false;
+        sharedPreferencesFacade.putObject(USER_KEY, userProfileDto);
+        return true;
+    }
+
+    @Override
+    public UserProfileDto retrieveUserData() {
+        return sharedPreferencesFacade.getObject(USER_KEY,UserProfileDto.class);
+    }
+
+    @Override
+    public boolean isLogged() {
+        return sharedPreferencesFacade.getObject(USER_KEY,UserProfileDto.class) != null;
     }
 }

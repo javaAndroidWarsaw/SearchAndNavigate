@@ -12,9 +12,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.softwareacademy.searchandnavigate.R;
+import com.softwareacademy.searchandnavigate.login.mvp.LoginMVP;
 import com.softwareacademy.searchandnavigate.model.dto.UserProfileDto;
 
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class LoginActivity extends AppCompatActivity implements LoginMVP.View,GoogleApiClient.OnConnectionFailedListener {
 
     private static final int RC_SIGN_IN = 1235;
     private GoogleApiClient mGoogleApiClient;
@@ -34,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         findViewById(R.id.sign_in_button).setOnClickListener(v -> {
             signIn();
         });
+
     }
 
     private void signIn() {
@@ -67,6 +69,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void userLogged() {
 
     }
 }

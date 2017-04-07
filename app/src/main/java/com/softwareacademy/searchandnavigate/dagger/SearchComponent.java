@@ -11,4 +11,6 @@ import dagger.Component;
 @Singleton
 @Component(modules = {MainAppModule.class,InterfaceModule.class})
 public interface SearchComponent {
+
+
 }

@@ -7,15 +7,21 @@ import com.softwareacademy.searchandnavigate.model.dto.UserProfileDto;
  */
 
 public interface LoginMVP {
-    interface Model{
+    interface Model {
         boolean saveUserData(UserProfileDto userProfileDto);
+
+        UserProfileDto retrieveUserData();
+
+        boolean isLogged();
     }
 
-    interface Presenter{
+    interface Presenter {
+        void checkIsUserLogged();
+
         void saveUserData(UserProfileDto userProfileDto);
     }
 
-    interface View{
-        void userDataSaved();
+    interface View {
+        void userLogged();
     }
 }
