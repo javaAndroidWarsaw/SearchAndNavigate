@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "91590086908",
+    "project_id": "searchandnavigate"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91590086908:android:fdfcc8109f42b8a5",
+        "android_client_info": {
+          "package_name": "com.softwareacademy.searchandnavigate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91590086908-4d1fvdnhpoegq98t19ukttdvch3mo0dv.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "91590086908-7eekgu2095ddv1mg926j1i2b7j10k6qg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.softwareacademy.searchandnavigate",
+            "certificate_hash": "509249d1afce24ce6316443228787ffb1ef46dd7"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAruAvwcjQ1rcb749f2Jie_JUsYftpu960"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
