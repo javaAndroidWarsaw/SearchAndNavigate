@@ -1,18 +1,24 @@
 package com.softwareacademy.searchandnavigate.login.mvp;
 
+import com.softwareacademy.searchandnavigate.dagger.scopes.ActivityScope;
 import com.softwareacademy.searchandnavigate.model.dto.UserProfileDto;
 import com.softwareacademy.searchandnavigate.utils.shared_preferences.SharedPreferencesFacade;
+
+import javax.inject.Inject;
 
 /**
  *
  */
 
+@ActivityScope
 public class LoginModel implements LoginMVP.Model {
 
 
     public static final String USER_KEY = "userKey";
     private SharedPreferencesFacade sharedPreferencesFacade;
 
+
+    @Inject
     public LoginModel(SharedPreferencesFacade sharedPreferencesFacade) {
         this.sharedPreferencesFacade = sharedPreferencesFacade;
     }

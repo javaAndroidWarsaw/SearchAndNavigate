@@ -1,5 +1,7 @@
 package com.softwareacademy.searchandnavigate.dagger;
 
+import com.softwareacademy.searchandnavigate.utils.shared_preferences.SharedPreferencesFacade;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -12,5 +14,5 @@ import dagger.Component;
 @Component(modules = {MainAppModule.class,InterfaceModule.class})
 public interface SearchComponent {
 
-
+    SharedPreferencesFacade provideSharedPreferencesFacade();
 }

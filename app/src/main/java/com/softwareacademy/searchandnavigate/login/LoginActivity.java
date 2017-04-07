@@ -12,17 +12,30 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.softwareacademy.searchandnavigate.R;
+import com.softwareacademy.searchandnavigate.SearchApplication;
+import com.softwareacademy.searchandnavigate.login.dagger.DaggerLoginActivityComponent;
+import com.softwareacademy.searchandnavigate.login.dagger.LoginActivityModule;
 import com.softwareacademy.searchandnavigate.login.mvp.LoginMVP;
 import com.softwareacademy.searchandnavigate.model.dto.UserProfileDto;
+import com.softwareacademy.searchandnavigate.utils.AppLog;
+
+import javax.inject.Inject;
 
 public class LoginActivity extends AppCompatActivity implements LoginMVP.View,GoogleApiClient.OnConnectionFailedListener {
 
     private static final int RC_SIGN_IN = 1235;
     private GoogleApiClient mGoogleApiClient;
 
+
+    @Inject
+    LoginMVP.Presenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        inject();
+
+
         setContentView(R.layout.activity_login);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -35,7 +48,14 @@ public class LoginActivity extends AppCompatActivity implements LoginMVP.View,Go
         findViewById(R.id.sign_in_button).setOnClickListener(v -> {
             signIn();
         });
+        presenter.checkIsUserLogged();
+    }
 
+    private void inject() {
+        DaggerLoginActivityComponent.builder()
+                .searchComponent(((SearchApplication)getApplication()).getSearchComponent())
+                .loginActivityModule(new LoginActivityModule(this))
+                .build().inject(this);
     }
 
     private void signIn() {
@@ -57,8 +77,7 @@ public class LoginActivity extends AppCompatActivity implements LoginMVP.View,Go
 
     private void handleSignInResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
-            UserProfileDto userProfileDto = new UserProfileDto(result);
-            userProfileDto.getUserName();
+            presenter.saveUserData( new UserProfileDto(result));
         } else {
              new AlertDialog.Builder(this).setTitle(R.string.fail)
                      .setMessage(R.string.unable_to_log)
@@ -74,6 +93,6 @@ public class LoginActivity extends AppCompatActivity implements LoginMVP.View,Go
 
     @Override
     public void userLogged() {
-
+        AppLog.log("LOGIN","user logged in");
     }
 }
