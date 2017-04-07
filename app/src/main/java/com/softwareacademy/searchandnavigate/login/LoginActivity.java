@@ -1,4 +1,4 @@
-package com.softwareacademy.searchandnavigate;
+package com.softwareacademy.searchandnavigate.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.softwareacademy.searchandnavigate.R;
 import com.softwareacademy.searchandnavigate.model.dto.UserProfileDto;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {

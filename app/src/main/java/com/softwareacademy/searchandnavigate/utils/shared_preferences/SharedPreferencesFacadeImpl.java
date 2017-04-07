@@ -26,4 +26,8 @@ public class SharedPreferencesFacadeImpl implements SharedPreferencesFacade {
     public String getString(String key) {
         return null;
     }
+
+
+
+
 }
