@@ -8,7 +8,9 @@ buildscript {
     ext.logginInterceptor  =  "3.2.0"
     ext.gsonConverterVersion = '2.0.2'
     ext.rxadapter = '2.0.2'
-
+    ext.rx_java = '1.1.5'
+    ext.rx_android = '1.2.0'
+    ext.rx_bondings = "0.4.0"
 
     ext.support_version = '25.3.0'
     ext.google_play_services = '10.2.1'

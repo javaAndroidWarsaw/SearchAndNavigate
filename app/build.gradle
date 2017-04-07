@@ -48,9 +48,15 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    compile "io.reactivex:rxjava:$rx_java"
+    compile "io.reactivex:rxandroid:$rx_android"
+    compile "com.jakewharton.rxbinding:rxbinding-appcompat-v7:$rx_bondings"
+    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    compile "com.squareup.okhttp3:logging-interceptor:$logginInterceptor"
+    compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
 
 
-    compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.android.support:appcompat-v7:25.3.0'
     testCompile 'junit:junit:4.12'
 }
