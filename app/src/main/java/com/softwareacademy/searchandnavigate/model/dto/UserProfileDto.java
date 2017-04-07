@@ -1,19 +1,25 @@
 package com.softwareacademy.searchandnavigate.model.dto;
 
+import android.net.Uri;
+
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.gson.annotations.Expose;
 
 /**
  *
  */
 
 public class UserProfileDto {
-
+    @Expose
     private String userName;
+    @Expose
     private String userPhotoUrl;
 
     public UserProfileDto(GoogleSignInResult googleSignInResult){
         userName  = googleSignInResult.getSignInAccount().getDisplayName();
-        userPhotoUrl = googleSignInResult.getSignInAccount().getPhotoUrl().toString();
+        Uri photoUrl = googleSignInResult.getSignInAccount().getPhotoUrl();
+        if(photoUrl !=null)
+        userPhotoUrl = photoUrl.toString();
     }
 
     public String getUserName() {

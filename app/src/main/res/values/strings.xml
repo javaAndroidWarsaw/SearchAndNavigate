@@ -3,4 +3,5 @@
     <string name="fail">Porażka</string>
     <string name="unable_to_log">Nie udało się zalogowac</string>
     <string name="ok">OK</string>
+    <string name="title_activity_map">Map</string>
 </resources>

@@ -21,7 +21,7 @@ public class SharedPreferencesFacadeImpl implements SharedPreferencesFacade {
     }
 
     @Override
-    public void writeString(String value, String key) {
+    public void writeString(String key, String value) {
         editor = sharedPreferences.edit();
         editor.putString(key, value);
         editor.apply();

@@ -37,11 +37,11 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "com.android.support:appcompat-v7:$support_version"
     compile "com.google.android.gms:play-services-auth:$google_play_services"
+    compile "com.google.android.gms:play-services-maps:$google_play_services"
 
 
     annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
     compile "com.google.dagger:dagger:${daggerVersion}"
-    compile "com.google.code.gson:gson:2.8.0"
 
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -50,5 +50,7 @@ dependencies {
 
 
 
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.android.support:appcompat-v7:25.3.0'
     testCompile 'junit:junit:4.12'
 }

@@ -16,6 +16,7 @@ import com.softwareacademy.searchandnavigate.SearchApplication;
 import com.softwareacademy.searchandnavigate.login.dagger.DaggerLoginActivityComponent;
 import com.softwareacademy.searchandnavigate.login.dagger.LoginActivityModule;
 import com.softwareacademy.searchandnavigate.login.mvp.LoginMVP;
+import com.softwareacademy.searchandnavigate.map.MapActivity;
 import com.softwareacademy.searchandnavigate.model.dto.UserProfileDto;
 import com.softwareacademy.searchandnavigate.utils.AppLog;
 
@@ -94,5 +95,7 @@ public class LoginActivity extends AppCompatActivity implements LoginMVP.View,Go
     @Override
     public void userLogged() {
         AppLog.log("LOGIN","user logged in");
+        MapActivity.openActivity(this);
+        finish();
     }
 }
