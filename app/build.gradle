@@ -30,7 +30,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "com.android.support:appcompat-v7:$support_version"
-    compile "com.google.android.gms:play-services-auth:$google_play_services"
+
 
 
     annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
