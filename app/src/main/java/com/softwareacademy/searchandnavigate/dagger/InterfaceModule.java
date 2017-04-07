@@ -1,5 +1,7 @@
 package com.softwareacademy.searchandnavigate.dagger;
 
+import com.softwareacademy.searchandnavigate.utils.network.SchedulersUtils;
+import com.softwareacademy.searchandnavigate.utils.network.SchedulersUtilsImpl;
 import com.softwareacademy.searchandnavigate.utils.shared_preferences.SharedPreferencesFacade;
 import com.softwareacademy.searchandnavigate.utils.shared_preferences.SharedPreferencesFacadeImpl;
 
@@ -17,4 +19,8 @@ public abstract class InterfaceModule {
     @Binds
     @Singleton
     public abstract SharedPreferencesFacade provideSharedPreferencesFacade(SharedPreferencesFacadeImpl sharedPreferencesFacade);
+
+    @Binds
+    @Singleton
+    public abstract SchedulersUtils provideSchedulersUtils(SchedulersUtilsImpl schedulersUtils);
 }
