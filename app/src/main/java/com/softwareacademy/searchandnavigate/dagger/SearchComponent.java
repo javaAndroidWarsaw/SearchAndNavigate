@@ -1,7 +1,6 @@
 package com.softwareacademy.searchandnavigate.dagger;
 
-import android.content.Context;
-
+import com.softwareacademy.searchandnavigate.SearchApplication;
 import com.softwareacademy.searchandnavigate.utils.network.SchedulersUtils;
 import com.softwareacademy.searchandnavigate.utils.shared_preferences.SharedPreferencesFacade;
 
@@ -23,5 +22,5 @@ public interface SearchComponent {
 
     SchedulersUtils provideSchedulersUtils();
 
-    Context provideContext();
+    SearchApplication provideContext();
 }

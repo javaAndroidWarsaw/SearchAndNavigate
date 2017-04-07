@@ -9,7 +9,7 @@ import rx.subscriptions.CompositeSubscription;
 
 public class AbstractClearSubscribtion implements ClearSubscribtion {
 
-    private CompositeSubscription compositeSubscription;
+    private CompositeSubscription compositeSubscription = new CompositeSubscription();
 
 
     protected void addToSubsctibiton(Subscription subscription) {
