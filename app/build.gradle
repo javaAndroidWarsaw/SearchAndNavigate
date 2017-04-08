@@ -15,6 +15,11 @@ android {
             enabled true
         }
     }
+    signingConfigs {
+        debug {
+            storeFile file('../debug.keystore')
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -31,7 +36,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "com.android.support:appcompat-v7:$support_version"
 
-
+    compile "com.google.android.gms:play-services-auth:$google_play_services"
 
     annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
     compile "com.google.dagger:dagger:${daggerVersion}"
