@@ -43,4 +43,6 @@ public class MainAppModule {
     SharedPreferences providesSharedPreferences(){
         return this.application.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE);
     }
+
+
 }
