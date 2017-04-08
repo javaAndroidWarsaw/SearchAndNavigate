@@ -7,18 +7,25 @@
 
 
     <ImageView
-        android:layout_marginTop="16dp"
+        android:id="@+id/profileImage"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:id="@+id/profileImage"
+        android:layout_gravity="top|center_horizontal"
 
-        android:layout_gravity="top|center_horizontal"/>
+        android:layout_marginTop="16dp" />
 
     <com.google.android.gms.common.SignInButton
+        android:id="@+id/signInButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:id="@+id/signInButton"/>
+        android:layout_gravity="center" />
+
+    <Button
+        android:id="@+id/openMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:text="openMap" />
 
 
 </FrameLayout>

@@ -16,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.softwareacademy.searchandnavigate.R;
+import com.softwareacademy.searchandnavigate.map.MapsActivity;
 import com.softwareacademy.searchandnavigate.utils.ViewsUtils;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
@@ -39,11 +40,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .build();
 
 
-
         findViewById(R.id.signInButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn();
+            }
+        });
+
+        findViewById(R.id.openMap).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MapsActivity.openMap(LoginActivity.this);
             }
         });
     }
@@ -63,12 +70,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             handleSignInResult(result);
         }
     }
+
     private void handleSignInResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
             GoogleSignInAccount acct = result.getSignInAccount();
             Uri photoUrl = acct.getPhotoUrl();
-            if(photoUrl !=null){
-                ImageView view = ViewsUtils.findView(this,R.id.profileImage);
+            if (photoUrl != null) {
+                ImageView view = ViewsUtils.findView(this, R.id.profileImage);
                 Glide.with(this).load(photoUrl)
                         .centerCrop()
                         .into(view);

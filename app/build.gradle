@@ -11,19 +11,19 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        jackOptions {
-            enabled true
-        }
+//        jackOptions {
+//            enabled true
+//        }
     }
     signingConfigs {
         debug {
             storeFile file('../debug.keystore')
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
     buildTypes {
         release {
             minifyEnabled false
@@ -37,10 +37,9 @@ dependencies {
     compile "com.android.support:appcompat-v7:$support_version"
 
     compile "com.google.android.gms:play-services-auth:$google_play_services"
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile "com.google.android.gms:play-services-maps:$google_play_services"
     annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
     compile "com.google.dagger:dagger:${daggerVersion}"
-    compile "com.google.code.gson:gson:2.8.0"
 
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -49,5 +48,8 @@ dependencies {
 
 
 
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.android.support:appcompat-v7:25.3.0'
     testCompile 'junit:junit:4.12'
 }
