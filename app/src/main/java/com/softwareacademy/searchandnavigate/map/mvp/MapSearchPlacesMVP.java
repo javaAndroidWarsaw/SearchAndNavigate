@@ -6,7 +6,7 @@ import com.softwareacademy.searchandnavigate.utils.network.ClearSubscribtion;
 import java.util.List;
 import java.util.Map;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  *

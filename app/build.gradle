@@ -40,6 +40,14 @@ dependencies {
     compile "com.google.android.gms:play-services-maps:$google_play_services"
 
 
+    compile "io.reactivex.rxjava2:rxjava:$rx_java"
+    compile "io.reactivex.rxjava2:rxandroid:$rx_android"
+    compile "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rx_bondings"
+    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    compile "com.squareup.okhttp3:logging-interceptor:$logginInterceptor"
+    compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
     annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
     compile "com.google.dagger:dagger:${daggerVersion}"
 
@@ -48,15 +56,9 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile "io.reactivex:rxjava:$rx_java"
-    compile "io.reactivex:rxandroid:$rx_android"
-    compile "com.jakewharton.rxbinding:rxbinding-appcompat-v7:$rx_bondings"
-    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    compile "com.squareup.okhttp3:logging-interceptor:$logginInterceptor"
-    compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    compile "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
 
 
-    compile 'com.android.support:appcompat-v7:25.3.0'
+
+
     testCompile 'junit:junit:4.12'
 }

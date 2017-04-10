@@ -1,7 +1,8 @@
 package com.softwareacademy.searchandnavigate.utils.network;
 
-import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
+
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 /**
  *
@@ -9,10 +10,10 @@ import rx.subscriptions.CompositeSubscription;
 
 public class AbstractClearSubscribtion implements ClearSubscribtion {
 
-    private CompositeSubscription compositeSubscription = new CompositeSubscription();
+    private CompositeDisposable compositeSubscription = new CompositeDisposable();
 
 
-    protected void addToSubsctibiton(Subscription subscription) {
+    protected void addToSubsctibiton(Disposable subscription) {
         compositeSubscription.add(subscription);
     }
 

@@ -15,7 +15,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.jakewharton.rxbinding.widget.RxTextView;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.softwareacademy.searchandnavigate.R;
 import com.softwareacademy.searchandnavigate.SearchApplication;
 import com.softwareacademy.searchandnavigate.map.dagger.DaggerMapActivityComponent;
@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import rx.android.schedulers.AndroidSchedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback, MapSearchPlacesMVP.View {
 

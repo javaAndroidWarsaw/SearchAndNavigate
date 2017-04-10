@@ -1,6 +1,6 @@
 package com.softwareacademy.searchandnavigate.utils.network;
 
-import rx.Scheduler;
+import io.reactivex.Scheduler;
 
 public interface SchedulersUtils {
     Scheduler subscribeScheduler();
