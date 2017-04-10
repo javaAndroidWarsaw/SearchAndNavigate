@@ -5,6 +5,7 @@ import com.softwareacademy.searchandnavigate.SearchApplication;
 import com.softwareacademy.searchandnavigate.dagger.scopes.ActivityScope;
 import com.softwareacademy.searchandnavigate.map.mvp.MapsMVP;
 import com.softwareacademy.searchandnavigate.map.mvp.MapsModel;
+import com.softwareacademy.searchandnavigate.map.mvp.MapsPresenter;
 import com.softwareacademy.searchandnavigate.network.GoogleRetrofitProvider;
 import com.softwareacademy.searchandnavigate.network.api.GooglePlacesApi;
 
@@ -17,7 +18,11 @@ import retrofit2.Retrofit;
  */
 @Module
 public class MapsActivityModule {
+    MapsMVP.View view;
 
+    public MapsActivityModule(MapsMVP.View view) {
+        this.view = view;
+    }
 
     @ActivityScope
     @Provides
@@ -33,5 +38,10 @@ public class MapsActivityModule {
 
 
 
+    @ActivityScope
+    @Provides
+    MapsMVP.Presenter providePresenter(MapsMVP.Model model){
+        return new MapsPresenter(model,view);
+    }
 
 }

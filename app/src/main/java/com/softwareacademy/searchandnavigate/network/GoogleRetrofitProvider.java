@@ -36,7 +36,7 @@ public class GoogleRetrofitProvider {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(myLogger);
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             okHttpClient = httpClientBuilder
-                    .addInterceptor(loggingInterceptor)
+//                    .addInterceptor(loggingInterceptor)
                     .readTimeout(20, TimeUnit.SECONDS)
                     .build();
         } else {
