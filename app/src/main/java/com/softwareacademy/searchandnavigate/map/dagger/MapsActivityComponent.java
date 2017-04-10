@@ -10,7 +10,7 @@ import dagger.Component;
  *
  */
 @ActivityScope
-@Component(dependencies = SearchComponent.class)
+@Component(dependencies = SearchComponent.class, modules = MapsActivityModule.class)
 public interface MapsActivityComponent {
     void inject(MapsActivity mapsActivity);
 
