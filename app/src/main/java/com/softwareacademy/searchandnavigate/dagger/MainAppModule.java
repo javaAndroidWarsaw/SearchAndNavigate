@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.softwareacademy.searchandnavigate.SearchApplication;
+import com.softwareacademy.searchandnavigate.network.GoogleRetrofitProvider;
 
 import javax.inject.Singleton;
 
@@ -42,6 +43,12 @@ public class MainAppModule {
     @Singleton
     SharedPreferences providesSharedPreferences(){
         return this.application.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE);
+    }
+
+    @Provides
+    @Singleton
+    GoogleRetrofitProvider provideGoogleRetrofitProvider(){
+        return new GoogleRetrofitProvider("https://maps.googleapis.com/maps/");
     }
 
 

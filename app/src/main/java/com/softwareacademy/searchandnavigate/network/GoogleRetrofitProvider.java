@@ -32,16 +32,16 @@ public class GoogleRetrofitProvider {
         OkHttpClient okHttpClient;
 
         if (BuildConfig.DEBUG) {
-            HttpLoggingInterceptor.Logger myLogger = message -> Log.d("SEARCH_AND_NAVIGATE",message);
+            HttpLoggingInterceptor.Logger myLogger = message -> Log.d("SEARCH_AND_NAVIGATE", message);
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(myLogger);
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             okHttpClient = httpClientBuilder
                     .addInterceptor(loggingInterceptor)
-                    .readTimeout(20,TimeUnit.SECONDS)
+                    .readTimeout(20, TimeUnit.SECONDS)
                     .build();
         } else {
             okHttpClient = httpClientBuilder
-                    .readTimeout(20,TimeUnit.SECONDS)
+                    .readTimeout(20, TimeUnit.SECONDS)
                     .build();
 
         }
@@ -51,8 +51,7 @@ public class GoogleRetrofitProvider {
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create(gson1))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create
-                        ())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build();
     }
