@@ -1,12 +1,7 @@
 package com.softwareacademy.searchandnavigate.map;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -28,7 +23,6 @@ import com.softwareacademy.searchandnavigate.map.dagger.MapsActivityModule;
 import com.softwareacademy.searchandnavigate.map.mvp.MapsMVP;
 import com.softwareacademy.searchandnavigate.model.dto.PlacesDto;
 import com.softwareacademy.searchandnavigate.model.dto.SearchParamsDto;
-import com.softwareacademy.searchandnavigate.utils.PermissionAsk;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,8 +39,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Inject
     MapsMVP.Presenter presenter;
-    private LocationManager locationManager;
-    private LocationListener locationListener;
+
 
     public static void openMap(Activity activity) {
         Intent intent = new Intent(activity, MapsActivity.class);
@@ -148,41 +141,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         querys.put("location","52.2,21");
         presenter.search(new SearchParamsDto("textsearch", querys));
 
-        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-        };
-        if(PermissionAsk.askForPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION, CODE)){
-            Criteria criteria = new Criteria();
-            criteria.setAccuracy(Criteria.ACCURACY_HIGH);
-            String bestProvider = locationManager.getBestProvider(criteria, true);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-        }
     }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        locationManager.removeUpdates(locationListener);
+
     }
 
     @Override
