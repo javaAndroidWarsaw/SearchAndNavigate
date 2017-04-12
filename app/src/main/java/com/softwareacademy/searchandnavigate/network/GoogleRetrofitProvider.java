@@ -28,6 +28,8 @@ public class GoogleRetrofitProvider {
         OkHttpClient okHttpClient;
 
 
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+
         okHttpClient = httpClientBuilder
                 .readTimeout(20, TimeUnit.SECONDS)
                 .build();
