@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -21,19 +22,23 @@ import com.softwareacademy.searchandnavigate.map.dagger.MapsActivityModule;
 import com.softwareacademy.searchandnavigate.map.mvp.MapsMVP;
 import com.softwareacademy.searchandnavigate.model.dto.PlacesDto;
 import com.softwareacademy.searchandnavigate.model.dto.SearchParamsDto;
+import com.softwareacademy.searchandnavigate.views.SearchQueryView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, MapsMVP.View {
 
     public static final int CODE = 1234;
     private GoogleMap mMap;
     private Marker warsawMarker;
-
+    private SearchQueryView queryView;
 
     @Inject
     MapsMVP.Presenter presenter;
@@ -59,12 +64,40 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        queryView = (SearchQueryView) findViewById(R.id.search_widget);
 
-
+        queryView.subscribeToStream()
+                .debounce(1000, TimeUnit.MILLISECONDS)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(searchParamsDto -> {
+                    presenter.search(searchParamsDto);
+                }, error -> {
+                    error.printStackTrace();
+                });
 
 
     }
 
+    private void showAllMarkers() {
+        builder = LatLngBounds.builder();
+        if (markers != null && markers.size() > 0) {
+            for (Marker marker : markers) {
+                builder.include(marker.getPosition());
+            }
+
+            LatLngBounds latLngBounds = builder.build();
+            int padding = 100;
+            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(latLngBounds, padding);
+            try {
+                mMap.animateCamera(cu);
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    }
 
     private List<Marker> markers;
     private LatLngBounds.Builder builder;
@@ -88,8 +121,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
         HashMap<String, String> querys = new HashMap<>();
-        querys.put("query","Centrum konferencyjne kopernik");
-        querys.put("location","52.2,21");
+        querys.put("query", "Centrum konferencyjne kopernik");
+        querys.put("location", "52.2,21");
         presenter.search(new SearchParamsDto("textsearch", querys));
 
     }
@@ -103,9 +136,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void showPlaces(List<PlacesDto> placesDtos) {
-        if(placesDtos.size()>0)
-        mMap.addMarker(new MarkerOptions()
-                .position(placesDtos.get(0).getLatLong())
-                .title(placesDtos.get(0).getTitle()));
+        if (placesDtos.size() > 0)
+            for (PlacesDto dto : placesDtos) {
+                markers.add(mMap.addMarker(new MarkerOptions()
+                        .position(dto.getLatLong())
+                        .title(dto.getTitle())));
+            }
+        showAllMarkers();
     }
 }
