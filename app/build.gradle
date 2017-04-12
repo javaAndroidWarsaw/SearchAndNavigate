@@ -48,7 +48,7 @@ dependencies {
     compile "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rx_bondings"
     compile "com.squareup.retrofit2:retrofit:$retrofit_version"
     compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
-    compile "com.squareup.okhttp3:logging-interceptor:$loggin_interceptor"
+//    compile "com.squareup.okhttp3:logging-interceptor:$loggin_interceptor"
     compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
