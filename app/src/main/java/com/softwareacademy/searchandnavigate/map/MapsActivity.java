@@ -4,9 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.View;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -65,55 +63,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-
-
-
-        setButtonListeners();
-
-
     }
 
-    private void setButtonListeners() {
-        findViewById(R.id.resetMarkers).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (warsawMarker != null) {
-                    warsawMarker.remove();
-                }
-                if (markers != null) {
-                    for (Marker marker : markers) {
-                        marker.remove();
-                    }
-                }
-                markers = new ArrayList<Marker>();
-
-            }
-        });
-
-
-        findViewById(R.id.showMarkers).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                builder = LatLngBounds.builder();
-                if (markers != null && markers.size() > 0) {
-                    for (Marker marker : markers) {
-                        builder.include(marker.getPosition());
-                    }
-
-                    LatLngBounds latLngBounds = builder.build();
-                    int padding = 100;
-                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(latLngBounds, padding);
-                    try {
-                        mMap.animateCamera(cu);
-                    } catch (IllegalStateException e) {
-                        e.printStackTrace();
-                    }
-
-
-                }
-            }
-        });
-    }
 
     private List<Marker> markers;
     private LatLngBounds.Builder builder;

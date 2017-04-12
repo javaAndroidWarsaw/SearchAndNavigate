@@ -3,4 +3,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="reset_markers">Remove Markres</string>
     <string name="show_markers">Show All Markers</string>
+    <string name="nearby">Nearby</string>
+    <string name="text_search">Text Search</string>
+    <string name="radial_search">Radial Search</string>
 </resources>
