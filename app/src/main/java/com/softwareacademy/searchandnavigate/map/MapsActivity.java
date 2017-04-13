@@ -89,28 +89,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        Criteria criteria = new Criteria();
 
-        criteria.setAccuracy(Criteria.ACCURACY_HIGH);
-        criteria.setAltitudeRequired(false);
-        criteria.setPowerRequirement(Criteria.POWER_HIGH);
-        String provider = locationManager.getBestProvider(criteria,false);
         setLocationListenr();
 
         if(PermissionAsk.askForPermission(this, Manifest.permission.ACCESS_FINE_LOCATION, REQUEST_LOCATION)){
-            locationManager.requestLocationUpdates(provider,
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                     0, 0, listener);
         }
     }
-
+    private Marker meMarker;
     private void setLocationListenr() {
         listener = new LocationListener() {
+
+
+
             @Override
             public void onLocationChanged(Location location) {
-                AppLog.log("POSITION",
-                        String.valueOf(location.getLatitude())+","+ String.valueOf(location.getLongitude()));
-            }
+                if(meMarker != null){
+                    meMarker.remove();
+                }
 
+                meMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("I am here"));
+            }
             @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {
 
@@ -169,6 +169,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setMyLocationEnabled(true);
         LatLng warsawLatLng = new LatLng(52.2, 21);
         warsawMarker = mMap.addMarker(new MarkerOptions().position(warsawLatLng).title("Marker in Warsaw"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(warsawLatLng, 14));
@@ -184,10 +185,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-        HashMap<String, String> querys = new HashMap<>();
-        querys.put("query", "Centrum konferencyjne kopernik");
-        querys.put("location", "52.2,21");
-        presenter.search(new SearchParamsDto("textsearch", querys));
+
+        if(PermissionAsk.askForPermission(this, Manifest.permission.ACCESS_FINE_LOCATION, REQUEST_LOCATION)){
+            locationManager.requestLocationUpdates(LocationManager,
+                    0, 0, listener);
+            Location  lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            meMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lastKnownLocation.getLatitude()
+                    , lastKnownLocation.getLongitude())).title("I am here"));
+        }
+
 
     }
 
