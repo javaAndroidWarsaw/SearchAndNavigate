@@ -1,8 +1,14 @@
 package com.softwareacademy.searchandnavigate.map;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -22,6 +28,8 @@ import com.softwareacademy.searchandnavigate.map.dagger.MapsActivityModule;
 import com.softwareacademy.searchandnavigate.map.mvp.MapsMVP;
 import com.softwareacademy.searchandnavigate.model.dto.PlacesDto;
 import com.softwareacademy.searchandnavigate.model.dto.SearchParamsDto;
+import com.softwareacademy.searchandnavigate.utils.AppLog;
+import com.softwareacademy.searchandnavigate.utils.PermissionAsk;
 import com.softwareacademy.searchandnavigate.views.SearchQueryView;
 
 import java.util.ArrayList;
@@ -36,12 +44,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, MapsMVP.View {
 
     public static final int CODE = 1234;
+    public static final int REQUEST_LOCATION = 12345;
     private GoogleMap mMap;
     private Marker warsawMarker;
     private SearchQueryView queryView;
 
     @Inject
     MapsMVP.Presenter presenter;
+    private LocationListener listener;
 
 
     public static void openMap(Activity activity) {
@@ -77,7 +87,61 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 });
 
 
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        Criteria criteria = new Criteria();
+
+        criteria.setAccuracy(Criteria.ACCURACY_HIGH);
+        criteria.setAltitudeRequired(false);
+        criteria.setPowerRequirement(Criteria.POWER_HIGH);
+        String provider = locationManager.getBestProvider(criteria,false);
+        setLocationListenr();
+
+        if(PermissionAsk.askForPermission(this, Manifest.permission.ACCESS_FINE_LOCATION, REQUEST_LOCATION)){
+            locationManager.requestLocationUpdates(provider,
+                    0, 0, listener);
+        }
     }
+
+    private void setLocationListenr() {
+        listener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                AppLog.log("POSITION",
+                        String.valueOf(location.getLatitude())+","+ String.valueOf(location.getLongitude()));
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == REQUEST_LOCATION){
+            if(PermissionAsk.doWeHavePermission(this,Manifest.permission.ACCESS_FINE_LOCATION)){
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                        0, 0, listener);
+            }
+        }
+    }
+
+    private LocationManager locationManager;
+
+
 
     private void showAllMarkers() {
         builder = LatLngBounds.builder();
